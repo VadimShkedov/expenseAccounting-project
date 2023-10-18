@@ -8,7 +8,7 @@ const App = () => {
       path: '/',
       element: <MainComponent />
     }
-  ])
+  ]);
 
   return <RouterProvider router={router} />
 }

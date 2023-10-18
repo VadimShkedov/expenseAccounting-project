@@ -1,4 +1,4 @@
-import "./WarningComponent.css"
+import "./WarningComponent.css";
 
 const WarningComponent = ({ message }) => {
   return (

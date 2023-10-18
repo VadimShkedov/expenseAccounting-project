@@ -5,7 +5,7 @@ import "./MainForm.css"
 
 const MainForm = () => {
 
-  const [warningMessage, setWarningMessage] = useState('')
+  const [warningMessage, setWarningMessage] = useState('');
 
   return (
     <div>

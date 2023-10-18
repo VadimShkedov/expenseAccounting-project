@@ -1,5 +1,5 @@
 const formHandler = (event, sendMessage) => {
-  const formData = new FormData(event.target.form)
+  const formData = new FormData(event.target.form);
 
   const howMuchValue = +formData.get('howMuch');
   let isIncorrect = false;
