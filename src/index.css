@@ -1,0 +1,5 @@
+@import url("../src/fonts/fonts.css");
+
+button, .main-section-form p, .main-section, input {
+  font-family: 'Roboto-Thin';
+}

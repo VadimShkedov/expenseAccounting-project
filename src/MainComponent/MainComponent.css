@@ -1,0 +1,14 @@
+.main-section {
+  background-color: #C2E7FF;
+  margin: auto;
+  padding: 3rem;
+  width: 752px;
+  height: 418px;
+  text-align: center;
+}
+
+.main-section h1 {
+  font-size: 2em;
+  margin-top: 0;
+  font-style: italic;
+}

@@ -1,0 +1,47 @@
+.main-section-form {
+  display: flex;
+  align-items: flex-end;
+}
+
+.main-section-form > div {
+  text-align: left;
+  display: flex;
+  margin-right: 1rem;
+  flex-direction: column;
+  font-size: 0.8em;
+}
+
+input, button {
+  padding: 1em;
+  border-radius: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input {
+  border: 0.1px solid #c6c6c6;
+}
+
+button{
+  font: inherit;
+  border: none;
+  padding: 0.7em 1em;
+  cursor: pointer;
+  background-color: #76C2A5;
+}
+
+input::placeholder {
+  opacity: 0.5;
+}
+
+input[name="whereSpent"] {
+  width: 350px;
+}
+
+input[name="howMuch"] {
+  width: 160px;
+}
