@@ -1,6 +1,8 @@
 import { useState } from "react";
-import formHandler from "./formHandler";
+import numberInputValidation from "../helpers/numberInputValidation";
+import stringInputValidation from "../helpers/stringInputValidation";
 import WarningComponent from "../WarningComponent/WarningComponent";
+import addExpense from "../helpers/addExpense";
 import "./MainForm.css"
 
 const MainForm = () => {
@@ -12,14 +14,14 @@ const MainForm = () => {
       <form className="main-section-form">
         <div>
           <p>Куда было потрачено:</p>
-          <input type="text" name="whereSpent" placeholder="Куда было потрачено" />
+          <input type="text" name="whereSpent" onChange={(e) => { stringInputValidation(e, setWarningMessage) }} placeholder="Куда было потрачено" />
         </div>
         <div>
           <p>Сколько было потрачено:</p>
-          <input type="number" name="howMuch" placeholder="Сколько было потрачено" />
+          <input type="number" name="howMuch" onChange={(e) => { numberInputValidation(e, setWarningMessage) }} placeholder="Сколько было потрачено" />
         </div>
-        <button onClick={(e) => formHandler(e, setWarningMessage)} type="button">Добавить</button>
-      </form>
+        <button type="button" onClick={addExpense}>Добавить</button>
+      </form> 
       <WarningComponent message={warningMessage}/>
     </div>
   )
