@@ -1,12 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainComponent from "./MainComponent/MainComponent";
+import Index from "./Index/Index";
 
 const App = () => {
-
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <MainComponent />
+      element: <Index />
     }
   ]);
 

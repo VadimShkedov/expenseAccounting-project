@@ -1,12 +1,6 @@
-const stringInputValidation = (event, sendMessage) => {
-  const { value } = event.target
-  const noSpaceString = value.trim()
-
-  if (noSpaceString.length === 0 || !isNaN(+noSpaceString)) {
-    sendMessage('Некорректно введённые данные');
-  } else {
-    sendMessage('')
-  }
+const stringInputValidation = (value) => {
+  const noSpaceString = value.trim();
+  return (noSpaceString.length === 0 || !isNaN(+noSpaceString));
 }
 
 export default stringInputValidation;
