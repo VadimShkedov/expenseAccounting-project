@@ -1,5 +1,5 @@
-import ExpenseForm from "../MainForm/ExpenseForm";
-import "./index.css"
+import ExpenseForm from "../ExpenseForm/ExpenseForm";
+import "./Index.css"
 
 const Index = () => {
   return (
