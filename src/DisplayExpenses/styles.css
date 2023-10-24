@@ -1,0 +1,25 @@
+.display {
+  font-size: 1.5em;
+}
+
+.list {
+  text-align: left;
+}
+
+.element {
+  display: flex;
+  font-weight: 700;
+}
+
+.element > * {
+  margin: 0.5em 0.7em;
+}
+
+.expenseName {
+  margin: 0.5em 0;
+  width: 300px;
+}
+
+.sumExpense {
+  text-align: right;
+}

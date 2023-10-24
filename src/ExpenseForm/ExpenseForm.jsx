@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Warning from "../Warning/Warning";
-import validateForm from "./validateForm";
-import "./ExpenseForm.css";
+import makeNewExpense from "./makeNewExpense";
+import "./styles.css";
 
-const ExpenseForm = ({ callback }) => {
+const ExpenseForm = ({ callback, list }) => {
   const [warningMessage, setWarningMessage] = useState('');
   const [expense, setExpense] = useState({
     whereSpent: '',
@@ -16,26 +16,35 @@ const ExpenseForm = ({ callback }) => {
   }
 
   const handleNewExpense = () => {
-    const { isWarning, data } = validateForm(expense);
-    (isWarning) ? setWarningMessage(data) : callback(data)
+    const { isWarning, data } = makeNewExpense(expense);
+
+    if (isWarning) {
+      setWarningMessage(data);
+      return;
+    }
+
+    const newExpense = [...list]
+    newExpense.push(data)
+    callback(newExpense)
+    setWarningMessage('');
   }
-  
+
   return (
     <div>
       <form className="main-form">
         <div>
           <p>Куда было потрачено:</p>
-          <input type="text" name="whereSpent" onChange={(e) => updateInputsState(e)} placeholder="Куда было потрачено" />
+          <input type="text" name="whereSpent" className="whereInput" onChange={updateInputsState} placeholder="Куда было потрачено" />
         </div>
         <div>
           <p>Сколько было потрачено:</p>
-          <input type="number" name="howMuch" onChange={(e) => updateInputsState(e)} placeholder="Сколько было потрачено" />
+          <input type="number" name="howMuch" className="costInput" onChange={updateInputsState} placeholder="Сколько было потрачено" />
         </div>
         <button type="button" onClick={handleNewExpense}>Добавить</button>
-      </form> 
+      </form>
       <Warning message={warningMessage} />
     </div>
   )
 }
 
-export default ExpenseForm;  
+export default ExpenseForm;

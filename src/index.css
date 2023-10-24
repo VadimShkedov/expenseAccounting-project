@@ -6,3 +6,27 @@ button,
 input {
   font-family: 'Roboto-Thin';
 }
+
+input,
+button {
+  padding: 1em;
+  border-radius: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  border: 0.1px solid #c6c6c6;
+}
+
+button {
+  font: inherit;
+  border: none;
+  padding: 0.7em 1em;
+  cursor: pointer;
+  background-color: #76C2A5;
+}

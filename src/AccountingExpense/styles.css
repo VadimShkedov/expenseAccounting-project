@@ -1,9 +1,11 @@
 .main-section {
   background-color: #C2E7FF;
   margin: auto;
+  position: relative;
   padding: 3rem;
-  width: 752px;
-  height: 418px;
+  padding-right: 5rem;
+  max-width: max-content;
+  min-height: 418px;
   text-align: center;
 }
 
