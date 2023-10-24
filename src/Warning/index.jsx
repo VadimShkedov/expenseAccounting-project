@@ -1,4 +1,4 @@
-import "./Warning.css";
+import "./styles.css";
 
 const Warning = ({ message }) => {
   return (
