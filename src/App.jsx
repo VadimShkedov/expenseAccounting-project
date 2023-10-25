@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Index from "./AccountingExpense/AccountingExpense";
+import AccountingExpense from "./ExpenseAccounting";
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Index />
+      element: <AccountingExpense />
     }
   ]);
 

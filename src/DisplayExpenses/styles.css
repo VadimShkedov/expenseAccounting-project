@@ -1,25 +1,25 @@
-.display {
+.display-expenses {
   font-size: 1.5em;
 }
 
-.list {
+.display-expenses-list {
   text-align: left;
 }
 
-.element {
+.display-expenses-list-element {
   display: flex;
   font-weight: 700;
 }
 
-.element > * {
+.display-expenses-list-element > * {
   margin: 0.5em 0.7em;
 }
 
-.expenseName {
+.display-expenses-list-element__expenseName {
   margin: 0.5em 0;
   width: 300px;
 }
 
-.sumExpense {
+.display-expenses__sumExpense {
   text-align: right;
 }

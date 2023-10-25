@@ -15,10 +15,10 @@ input::placeholder {
   opacity: 0.5;
 }
 
-.whereInput {
+#whereSpent {
   width: 300px;
 }
 
-.costInput {
+#howMuch {
   width: 160px;
 }
