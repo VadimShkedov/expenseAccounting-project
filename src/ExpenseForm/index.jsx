@@ -56,7 +56,7 @@ const ExpenseForm = () => {
             placeholder="Сколько было потрачено" 
           />
         </div>
-        <button type="button" onClick={() => makeNewExpenseAndValidation(expense)}>Добавить</button>
+        <button type="button" onClick={makeNewExpenseAndValidation}>Добавить</button>
       </form>
       <Warning message={warningMessage} />
     </div>
