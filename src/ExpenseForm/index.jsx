@@ -16,11 +16,11 @@ const ExpenseForm = () => {
     setExpense({
       ...expense,
       [event.target.id]: event.target.value
-    })
+    });
   }
 
   const makeNewExpenseAndValidation = () => {
-    const { howMuch, whereSpent } = expense
+    const { howMuch, whereSpent } = expense;
 
     if (numberInputValidation(howMuch)) {
       setWarningMessage('Некорректно введённое число, допустимый диапозон от 1 до 100000');

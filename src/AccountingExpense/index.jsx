@@ -1,5 +1,5 @@
 import ExpenseForm from "../ExpenseForm";
-import "./styles.css"
+import "./styles.css";
 
 const AccountingExpense = () => {
   return (
