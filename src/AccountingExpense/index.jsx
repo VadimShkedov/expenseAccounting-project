@@ -3,7 +3,7 @@ import "./styles.css"
 
 const AccountingExpense = () => {
   return (
-    <section className="main-section">
+    <section className="accountingExpense">
       <h1>Учёт моих расходов</h1>
       <ExpenseForm />
     </section>

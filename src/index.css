@@ -1,8 +1,7 @@
 @import url("../src/fonts/fonts.css");
 
-button, 
-.main-section-form p, 
-.main-section, 
+button,
+.accountingExpense, 
 input {
   font-family: 'Roboto-Thin';
 }
@@ -29,4 +28,8 @@ button {
   padding: 0.7em 1em;
   cursor: pointer;
   background-color: #76C2A5;
+}
+
+input::placeholder {
+  opacity: 0.5;
 }

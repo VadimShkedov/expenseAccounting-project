@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Warning from "../Warning";
-import makeNewExpense from "./makeNewExpense";
+import numberInputValidation from "../helpers/numberInputValidation";
+import stringInputValidation from "../helpers/stringInputValidation";
 import "./styles.css";
 
 const ExpenseForm = () => {
@@ -11,17 +12,23 @@ const ExpenseForm = () => {
   });
 
   const handleFieldChange = (event) => {
+    console.log(event);
     setExpense({
       ...expense,
-      [event.target.name]: event.target.value
+      [event.target.id]: event.target.value
     })
   }
 
-  const handleNewExpense = () => {
-    const { isWarning, data } = makeNewExpense(expense);
+  const makeNewExpenseAndValidation = () => {
+    const { howMuch, whereSpent } = expense
 
-    if (isWarning) {
-      setWarningMessage(data);
+    if (numberInputValidation(howMuch)) {
+      setWarningMessage('Некорректно введённое число, допустимый диапозон от 1 до 100000');
+      return;
+    }
+  
+    if (stringInputValidation(whereSpent)) {
+      setWarningMessage('Некорректно введённые данные');
       return;
     }
 
@@ -30,16 +37,26 @@ const ExpenseForm = () => {
 
   return (
     <div>
-      <form className="main-form">
+      <form className="expenseForm">
         <div>
-          <p>Куда было потрачено:</p>
-          <input type="text" name="whereSpent" className="main-form__whereInput" onChange={handleFieldChange} placeholder="Куда было потрачено" />
+          <label htmlFor="whereSpent">Куда было потрачено:</label>
+          <input 
+            type="text" 
+            id="whereSpent" 
+            onChange={handleFieldChange} 
+            placeholder="Куда было потрачено" 
+          />
         </div>
         <div>
-          <p>Сколько было потрачено:</p>
-          <input type="number" name="howMuch" className="main-form__howMuch" onChange={handleFieldChange} placeholder="Сколько было потрачено" />
+          <label htmlFor="howMuch">Сколько было потрачено:</label>
+          <input 
+            type="number" 
+            id="howMuch" 
+            onChange={handleFieldChange} 
+            placeholder="Сколько было потрачено" 
+          />
         </div>
-        <button type="button" onClick={handleNewExpense}>Добавить</button>
+        <button type="button" onClick={() => makeNewExpenseAndValidation(expense)}>Добавить</button>
       </form>
       <Warning message={warningMessage} />
     </div>
