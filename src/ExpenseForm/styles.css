@@ -11,10 +11,10 @@
   font-size: 0.8em;
 }
 
-#whereSpent {
+.expenseForm__whereSpent {
   width: 300px;
 }
 
-#howMuch {
+.expenseForm__howMuch {
   width: 160px;
 }
