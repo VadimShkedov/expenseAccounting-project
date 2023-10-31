@@ -2,20 +2,20 @@
   font-size: 1.5em;
 }
 
-.displayExpenses-list {
+.displayExpensesList {
   text-align: left;
 }
 
-.displayExpenses-list-element {
+.displayExpensesListElement {
   display: flex;
   font-weight: 700;
 }
 
-.displayExpenses-list-element > * {
+.displayExpensesListElement > * {
   margin: 0.5em 0.7em;
 }
 
-.displayExpenses-list-element__expenseName {
+.displayExpensesListElement__expenseName {
   margin: 0.5em 0;
   width: 300px;
 }
