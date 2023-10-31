@@ -14,7 +14,7 @@ const ExpenseForm = ({ onAddExpense }) => {
   const handleFieldChange = (event) => {
     setExpense({
       ...expense,
-      [event.target.id]: event.target.value,
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -44,7 +44,7 @@ const ExpenseForm = ({ onAddExpense }) => {
           <input 
             type="text"
             className="expenseForm__whereSpent"
-            id="whereSpent" 
+            name="whereSpent" 
             onChange={handleFieldChange} 
             placeholder="Куда было потрачено" 
           />
@@ -54,7 +54,7 @@ const ExpenseForm = ({ onAddExpense }) => {
           <input 
             type="number" 
             className="expenseForm__howMuch"
-            id="howMuch" 
+            name="howMuch" 
             onChange={handleFieldChange} 
             placeholder="Сколько было потрачено" 
           />
