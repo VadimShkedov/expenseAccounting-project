@@ -4,35 +4,36 @@ import numberInputValidation from "../helpers/numberInputValidation";
 import stringInputValidation from "../helpers/stringInputValidation";
 import "./styles.css";
 
-const ExpenseForm = () => {
-  const [warningMessage, setWarningMessage] = useState('');
+const ExpenseForm = ({ onAddExpense }) => {
+  const [warningMessage, setWarningMessage] = useState("");
   const [expense, setExpense] = useState({
-    whereSpent: '',
-    howMuch: ''
+    whereSpent: "",
+    howMuch: ""
   });
 
   const handleFieldChange = (event) => {
-    console.log(event);
     setExpense({
       ...expense,
-      [event.target.id]: event.target.value
+      [event.target.id]: event.target.value,
     });
   }
 
-  const makeNewExpenseAndValidation = () => {
+  const validationField = () => {
     const { howMuch, whereSpent } = expense;
 
     if (numberInputValidation(howMuch)) {
-      setWarningMessage('Некорректно введённое число, допустимый диапозон от 1 до 100000');
+      setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
       return;
     }
   
     if (stringInputValidation(whereSpent)) {
-      setWarningMessage('Некорректно введённые данные');
+      setWarningMessage("Некорректно введённые данные");
       return;
     }
+    
+    setWarningMessage("");
 
-    setWarningMessage('');
+    return onAddExpense(expense);
   }
 
   return (
@@ -41,7 +42,8 @@ const ExpenseForm = () => {
         <div>
           <label htmlFor="whereSpent">Куда было потрачено:</label>
           <input 
-            type="text" 
+            type="text"
+            className="expenseForm__whereSpent"
             id="whereSpent" 
             onChange={handleFieldChange} 
             placeholder="Куда было потрачено" 
@@ -51,12 +53,13 @@ const ExpenseForm = () => {
           <label htmlFor="howMuch">Сколько было потрачено:</label>
           <input 
             type="number" 
+            className="expenseForm__howMuch"
             id="howMuch" 
             onChange={handleFieldChange} 
             placeholder="Сколько было потрачено" 
           />
         </div>
-        <button type="button" onClick={makeNewExpenseAndValidation}>Добавить</button>
+        <button type="button" onClick={validationField}>Добавить</button>
       </form>
       <Warning message={warningMessage} />
     </div>

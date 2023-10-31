@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AccountingExpense from "./AccountingExpense/";
+import AccountingExpense from "./ExpenseAccounting";
 
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <AccountingExpense />
     }
   ]);

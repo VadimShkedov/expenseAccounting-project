@@ -1,0 +1,25 @@
+.displayExpenses {
+  font-size: 1.5em;
+}
+
+.displayExpenses-list {
+  text-align: left;
+}
+
+.displayExpenses-list-element {
+  display: flex;
+  font-weight: 700;
+}
+
+.displayExpenses-list-element > * {
+  margin: 0.5em 0.7em;
+}
+
+.displayExpenses-list-element__expenseName {
+  margin: 0.5em 0;
+  width: 300px;
+}
+
+.displayExpenses__sumExpense {
+  text-align: right;
+}
