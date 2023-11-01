@@ -1,7 +1,7 @@
-@import url("../src/fonts/fonts.css");
+@import url("./fonts/fonts.css");
 
 button,
-.accountingExpense, 
+.expenseAccounting, 
 input {
   font-family: 'Roboto-Thin';
 }
