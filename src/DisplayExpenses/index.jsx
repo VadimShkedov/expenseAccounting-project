@@ -1,4 +1,4 @@
-import Expense from "./Expense";
+import ExpenseElement from "../ExpenseElement";
 import "./styles.css";
 
 const DisplayExpenses = ({ list, sum }) =>
@@ -7,7 +7,7 @@ const DisplayExpenses = ({ list, sum }) =>
     <div className="displayExpensesList">
       {
         list.map((expense) =>
-          <Expense
+          <ExpenseElement
             key={expense.expenseId}
             element={expense}
           />

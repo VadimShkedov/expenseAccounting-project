@@ -23,7 +23,6 @@ const ExpenseAccounting = () => {
 
   const validationField = () => {
     const { howMuch, whereSpent } = expense;
-    const currentDate = new Date(Date.now());
 
     if (numberInputValidation(howMuch)) {
       setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
@@ -38,9 +37,8 @@ const ExpenseAccounting = () => {
     expensesSum.current += +howMuch;
     const modifiedExpense = {
       ...expense,
-      currentSum: expensesSum,
       expenseId: currentExpenseList.length,
-      date: currentDate.toLocaleDateString()
+      date: new Date().toLocaleDateString()
     };
 
     setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
@@ -48,7 +46,7 @@ const ExpenseAccounting = () => {
   }
 
   return (
-    <section className="accountingExpense">
+    <section className="expenseAccounting">
       <h1>Учёт моих расходов</h1>
       <ExpenseForm
         warning={warningMessage}

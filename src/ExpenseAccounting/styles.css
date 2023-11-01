@@ -1,4 +1,4 @@
-.accountingExpense {
+.expenseAccounting {
   background-color: #C2E7FF;
   margin: auto;
   position: relative;
@@ -9,7 +9,7 @@
   text-align: center;
 }
 
-.accountingExpense h1 {
+.expenseAccounting h1 {
   font-size: 2em;
   margin-top: 0;
   font-style: italic;

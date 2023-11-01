@@ -6,20 +6,6 @@
   text-align: left;
 }
 
-.displayExpensesListElement {
-  display: flex;
-  font-weight: 700;
-}
-
-.displayExpensesListElement > * {
-  margin: 0.5em 0.7em;
-}
-
-.displayExpensesListElement__expenseName {
-  margin: 0.5em 0;
-  width: 300px;
-}
-
 .displayExpenses__sumExpense {
   text-align: right;
 }
