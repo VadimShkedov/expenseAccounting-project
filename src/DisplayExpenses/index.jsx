@@ -9,7 +9,7 @@ const DisplayExpenses = ({ list, sum }) =>
         list.map((expense) =>
           <ExpenseElement
             key={expense.expenseId}
-            element={expense}
+            expense={expense}
           />
         )}
     </div>

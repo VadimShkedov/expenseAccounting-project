@@ -1,13 +1,13 @@
-.expense {
+.expenseElement {
   display: flex;
   font-weight: 700;
 }
 
-.expense > * {
+.expenseElement > * {
   margin: 0.5em 0.7em;
 }
 
-.expense__expenseName {
+.expenseElement__expenseName {
   margin: 0.5em 0;
   width: 300px;
 }

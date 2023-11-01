@@ -9,7 +9,7 @@ const ExpenseForm = ({ handleFields, validation, warning }) =>
         <input
           type="text"
           className="expenseForm__whereSpent"
-          name="whereSpent"
+          id="whereSpent"
           onChange={handleFields}
           placeholder="Куда было потрачено"
         />
@@ -19,7 +19,7 @@ const ExpenseForm = ({ handleFields, validation, warning }) =>
         <input
           type="number"
           className="expenseForm__howMuch"
-          name="howMuch"
+          id="howMuch"
           onChange={handleFields}
           placeholder="Сколько было потрачено"
         />
