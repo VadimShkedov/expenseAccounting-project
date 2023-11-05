@@ -1,0 +1,11 @@
+.displayExpenses {
+  font-size: 1.5em;
+}
+
+.displayExpensesList {
+  text-align: left;
+}
+
+.displayExpenses__sumExpense {
+  text-align: right;
+}

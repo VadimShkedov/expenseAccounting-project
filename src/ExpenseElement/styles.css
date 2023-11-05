@@ -1,0 +1,13 @@
+.expenseElement {
+  display: flex;
+  font-weight: 700;
+}
+
+.expenseElement > * {
+  margin: 0.5em 0.7em;
+}
+
+.expenseElement__expenseName {
+  margin: 0.5em 0;
+  width: 300px;
+}
