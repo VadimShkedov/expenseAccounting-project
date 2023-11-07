@@ -3,15 +3,17 @@ import ExpenseForm from "../ExpenseForm";
 import DisplayExpenses from "../DisplayExpenses";
 import numberInputValidation from "../helpers/numberInputValidation";
 import stringInputValidation from "../helpers/stringInputValidation";
+import EditingExpenseContext from "../editingExpense-context";
 import "./styles.css";
 
 const ExpenseAccounting = () => {
   const expensesSum = useRef(0);
+  const [indexEditingComponent, setIndexEditingComponent] = useState(-1)
   const [currentExpenseList, setCurrentExpenseList] = useState([]);
   const [warningMessage, setWarningMessage] = useState("");
   const [expense, setExpense] = useState({
     whereSpent: "",
-    howMuch: ""
+    howMuch: "",
   });
 
   const handleFieldChange = (event) => {
@@ -45,6 +47,33 @@ const ExpenseAccounting = () => {
     setWarningMessage("");
   }
 
+  const deleteExpense = (deletedExpenseId) => {
+    const expenseListAfterDelete = []
+
+    currentExpenseList.forEach((value, index) => {
+      if (index < deletedExpenseId) {
+        expenseListAfterDelete.push(value)
+      }
+
+      if (index > deletedExpenseId) {
+        value.expenseId--
+        expenseListAfterDelete.push(value)
+      }
+    })
+
+    const { howMuch } = currentExpenseList[deletedExpenseId]
+    expensesSum.current -= howMuch
+
+    setIndexEditingComponent(-1)
+    setCurrentExpenseList(expenseListAfterDelete)
+  }
+
+  const editExpense = (expenseId) => setIndexEditingComponent(expenseId)
+
+  const applyEditingExpense = (expense) => {
+
+  }
+
   return (
     <section className="expenseAccounting">
       <h1>Учёт моих расходов</h1>
@@ -53,10 +82,13 @@ const ExpenseAccounting = () => {
         validation={validationField}
         handleFields={handleFieldChange}
       />
-      <DisplayExpenses
-        sum={expensesSum.current} 
-        list={currentExpenseList}
-      />
+      <EditingExpenseContext.Provider value={{ deleteExpense, editExpense, applyEditingExpense }}>
+        <DisplayExpenses
+          sum={expensesSum.current}
+          list={currentExpenseList}
+          editingElementId={indexEditingComponent}
+        />
+      </EditingExpenseContext.Provider>
     </section>
   )
 }

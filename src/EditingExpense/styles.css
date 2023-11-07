@@ -1,32 +1,32 @@
-.expenseElement {
+.editingExpense {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 700;
 }
 
-.expenseElement > * {
+.editingExpense > * {
   margin: 0.5em 0.7em;
 }
 
-.expenseElement__expenseName {
+.editingExpense__expenseName {
   margin: 0.5em 0;
   width: 300px;
 }
 
-.expenseElementButtons {
+.editingExpenseButtons {
   margin-right: 0;
 }
 
-.expenseElementButtons__edit {
+.editingExpenseButtons__edit {
   background-image: url('../svg/pencil.svg');
 }
 
-.expenseElementButtons__delete {
+.editingExpenseButtons__delete {
   background-image: url('../svg/trash.svg');
 }
 
-.expenseElementButtons__edit, .expenseElementButtons__delete {
+.editingExpenseButtons__edit, .editingExpenseButtons__delete {
   background-repeat: no-repeat;
   background-position: center;
   background-color: initial;
