@@ -9,6 +9,10 @@
   margin: 0.5em 0.7em;
 }
 
+.expenseElement > p {
+  height: 23px;
+}
+
 .expenseElement__expenseName {
   margin: 0.5em 0;
   width: 300px;

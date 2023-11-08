@@ -23,28 +23,49 @@ const ExpenseAccounting = () => {
     });
   }
 
-  const validationField = () => {
+  const validationField = (event) => {
     const { howMuch, whereSpent } = expense;
+    const { form } = event.target
 
-    if (numberInputValidation(howMuch)) {
+    if (numberInputValidation(howMuch) || !form['howMuch'].value) {
       setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
       return;
     }
 
-    if (stringInputValidation(whereSpent)) {
+    if (stringInputValidation(whereSpent) || !form['whereSpent'].value) {
       setWarningMessage("Некорректно введённые данные");
       return;
     }
-
-    expensesSum.current += +howMuch;
-    const modifiedExpense = {
-      ...expense,
-      expenseId: currentExpenseList.length,
-      date: new Date().toLocaleDateString()
-    };
-
-    setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
     setWarningMessage("");
+
+    if (indexEditingComponent !== -1) { //if expense element needs to be changed
+      const currentExpenseCost = currentExpenseList[indexEditingComponent].howMuch
+      const currentExpenseDate = currentExpenseList[indexEditingComponent].date
+
+      const modifiedExpenseAfterEdit = {
+        ...expense,
+        expenseId: indexEditingComponent,
+        date: expense.date || currentExpenseDate
+      }
+      
+      currentExpenseList[indexEditingComponent] = modifiedExpenseAfterEdit;
+      expensesSum.current += +howMuch - currentExpenseCost;
+      setCurrentExpenseList(currentExpenseList)
+      setIndexEditingComponent(-1)
+
+    } else {
+      expensesSum.current += +howMuch;
+      const dateToISO = new Date().toISOString()
+
+      const modifiedExpense = {
+        ...expense,
+        expenseId: currentExpenseList.length,
+        date: dateToISO.split('T')[0]
+      };
+      setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
+    }
+
+    form.reset()
   }
 
   const deleteExpense = (deletedExpenseId) => {
@@ -70,10 +91,6 @@ const ExpenseAccounting = () => {
 
   const editExpense = (expenseId) => setIndexEditingComponent(expenseId)
 
-  const applyEditingExpense = (expense) => {
-
-  }
-
   return (
     <section className="expenseAccounting">
       <h1>Учёт моих расходов</h1>
@@ -82,7 +99,7 @@ const ExpenseAccounting = () => {
         validation={validationField}
         handleFields={handleFieldChange}
       />
-      <EditingExpenseContext.Provider value={{ deleteExpense, editExpense, applyEditingExpense }}>
+      <EditingExpenseContext.Provider value={{ deleteExpense, editExpense, handleFieldChange, validationField }}>
         <DisplayExpenses
           sum={expensesSum.current}
           list={currentExpenseList}

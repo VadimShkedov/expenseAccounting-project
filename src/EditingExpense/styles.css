@@ -11,22 +11,22 @@
 
 .editingExpense__expenseName {
   margin: 0.5em 0;
-  width: 300px;
+  width: 150px;
 }
 
 .editingExpenseButtons {
   margin-right: 0;
 }
 
-.editingExpenseButtons__edit {
-  background-image: url('../svg/pencil.svg');
+.editingExpenseButtons__applyChanges {
+  background-image: url('../svg/check.svg');
 }
 
 .editingExpenseButtons__delete {
   background-image: url('../svg/trash.svg');
 }
 
-.editingExpenseButtons__edit, .editingExpenseButtons__delete {
+.editingExpenseButtons__applyChanges, .editingExpenseButtons__delete {
   background-repeat: no-repeat;
   background-position: center;
   background-color: initial;
