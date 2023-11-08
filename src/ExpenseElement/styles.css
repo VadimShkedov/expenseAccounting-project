@@ -13,9 +13,13 @@
   height: 23px;
 }
 
+.editingExpense__howMuch {
+  width: 100px;
+}
+
 .expenseElement__expenseName {
   margin: 0.5em 0;
-  width: 300px;
+  width: 290px;
 }
 
 .expenseElementButtons {

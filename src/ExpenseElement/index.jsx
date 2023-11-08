@@ -8,9 +8,9 @@ const ExpenseElement = ({ expense }) => {
 
   return (
     <div className="expenseElement">
-      <p className="expenseElement__expenseName">{expenseId + 1 + ")"} "{whereSpent}"</p>
+      <p className="expenseElement__expenseName">{expenseId + 1 + ")"} {whereSpent}</p>
       <p>{date}</p>
-      <p>{howMuch} р.</p>
+      <p className="editingExpense__howMuch">{howMuch} р.</p>
       <div className="expenseElementButtons">
         <input type="button" className="expenseElementButtons__edit" onClick={() => editExpense(expenseId)} />
         <input type="button" className="expenseElementButtons__delete" onClick={() => deleteExpense(expenseId)}/>          

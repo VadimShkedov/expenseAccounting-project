@@ -10,7 +10,7 @@ const EditingExpense = ({ expense }) => {
     <form className="editingExpense">
       <input type="text" className="editingExpense__expenseName" id="whereSpent" defaultValue={whereSpent} onChange={handleFieldChange} />
       <input type="date" id="date" defaultValue={date} onChange={handleFieldChange} />
-      <input type="number" id="howMuch" defaultValue={howMuch} onChange={handleFieldChange} />
+      <input type="number" id="howMuch" className="editingExpense__howMuch" defaultValue={howMuch} onChange={handleFieldChange} />
       <div className="editingExpenseButtons">
         <input type="button" className="editingExpenseButtons__applyChanges" onClick={validationField} />
         <input type="button" className="editingExpenseButtons__delete" onClick={() => deleteExpense(expenseId)} />
