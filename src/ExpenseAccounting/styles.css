@@ -2,7 +2,7 @@
   background-color: #C2E7FF;
   margin: auto;
   position: relative;
-  padding: 3rem;
+  padding: 2rem;
   padding-right: 5rem;
   max-width: max-content;
   min-height: 418px;
@@ -13,4 +13,15 @@
   font-size: 2em;
   margin-top: 0;
   font-style: italic;
+}
+
+@media (max-width: 795px) {
+  .expenseAccounting {
+    padding-right: 3rem;
+  }
+
+  .expenseAccounting h1 {
+    margin-bottom: 0;
+    text-align: start;
+  }
 }

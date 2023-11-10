@@ -3,7 +3,7 @@ import "./styles.css";
 
 const ExpenseForm = ({ handleFields, validation, warning }) =>
   <div>
-    <form className="expenseForm">
+    <div className="expenseForm">
       <div>
         <label htmlFor="whereSpent">Куда было потрачено:</label>
         <input
@@ -24,8 +24,8 @@ const ExpenseForm = ({ handleFields, validation, warning }) =>
           placeholder="Сколько было потрачено"
         />
       </div>
-      <button type="button" onClick={validation}>Добавить</button>
-    </form>
+      <button type="button" className="expenseForm__button" onClick={validation}>Добавить</button>
+    </div>
     <Warning message={warning} />
   </div>
 

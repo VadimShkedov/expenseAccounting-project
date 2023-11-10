@@ -1,44 +1,79 @@
 .expenseElement {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   font-weight: 700;
 }
 
-.expenseElement > * {
+.expenseElementInfo  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expenseElementInfo > * {
   margin: 0.5em 0.7em;
 }
 
-.expenseElement > p {
+.expenseElementInfo > p {
   height: 23px;
 }
 
-.editingExpense__howMuch {
+.expenseElementInfo__howMuch {
   width: 100px;
 }
 
 .expenseElement__expenseName {
-  margin: 0.5em 0;
   width: 290px;
 }
 
-.expenseElementButtons {
+.expenseElementInfoButtons {
   margin-right: 0;
 }
 
-.expenseElementButtons__edit {
+.expenseElementInfoButtons__edit {
   background-image: url('../svg/pencil.svg');
 }
 
-.expenseElementButtons__delete {
+.expenseElementInfoButtons__delete {
   background-image: url('../svg/trash.svg');
 }
 
-.expenseElementButtons__edit, .expenseElementButtons__delete {
+.expenseElementInfoButtons__edit, .expenseElementInfoButtons__delete {
   background-repeat: no-repeat;
   background-position: center;
   background-color: initial;
   border: none;
   padding: 1.2em;
   cursor: pointer;
+}
+
+@media (max-width: 795px) {
+  .expenseElement {
+    margin-bottom: 1em;
+  }
+
+  .expenseElementInfo {
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .expenseElement__expenseName {
+    width: 176px;
+  }
+
+  .expenseElementInfo > * {
+    margin: 0.2em 0;
+    text-align: end;
+  }
+
+  .expenseElementInfoButtons {
+    display: flex;
+    min-width: 100%;
+    margin-right: 0;
+    align-self: center;
+  }
+
+  .expenseElementInfoButtons > * {
+    background-size: 45px;
+  }
 }

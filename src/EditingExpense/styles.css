@@ -14,8 +14,6 @@
   width: 150px;
 }
 
-
-
 .editingExpenseButtons {
   margin-right: 0;
 }
@@ -35,4 +33,11 @@
   border: none;
   padding: 1.2em;
   cursor: pointer;
+}
+
+@media (max-width: 795px) {
+  .editingExpenseButtons {
+    display: flex;
+    flex-direction: column;
+  }
 }

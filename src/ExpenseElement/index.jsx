@@ -1,19 +1,18 @@
-import { useContext } from "react";
-import EditingExpenseContext from "../editingExpense-context";
 import "./styles.css";
 
-const ExpenseElement = ({ expense }) => {
-  const { deleteExpense, editExpense } = useContext(EditingExpenseContext)
-  const { expenseId, whereSpent, howMuch, date } = expense;
+const ExpenseElement = ({ expense, editExpense }) => {
+  const { id, whereSpent, howMuch, date } = expense;
 
   return (
     <div className="expenseElement">
-      <p className="expenseElement__expenseName">{expenseId + 1 + ")"} {whereSpent}</p>
-      <p>{date}</p>
-      <p className="editingExpense__howMuch">{howMuch} р.</p>
-      <div className="expenseElementButtons">
-        <input type="button" className="expenseElementButtons__edit" onClick={() => editExpense(expenseId)} />
-        <input type="button" className="expenseElementButtons__delete" onClick={() => deleteExpense(expenseId)}/>          
+      <p className="expenseElement__expenseName">{id + 1 + ")"} {whereSpent}</p>
+      <div className="expenseElementInfo">
+        <p>{date}</p>
+        <p className="expenseElementInfo__howMuch">{howMuch} р.</p>
+        <div className="expenseElementInfoButtons">
+          <input type="button" className="expenseElementInfoButtons__edit" onClick={() => editExpense(id)} />
+          <input type="button" className="expenseElementInfoButtons__delete" onClick={() => editExpense(id, true)}/>          
+        </div>
       </div>
     </div>
   )

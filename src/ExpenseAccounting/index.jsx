@@ -3,109 +3,147 @@ import ExpenseForm from "../ExpenseForm";
 import DisplayExpenses from "../DisplayExpenses";
 import numberInputValidation from "../helpers/numberInputValidation";
 import stringInputValidation from "../helpers/stringInputValidation";
-import EditingExpenseContext from "../editingExpense-context";
 import "./styles.css";
 
 const ExpenseAccounting = () => {
   const expensesSum = useRef(0);
-  const [indexEditingComponent, setIndexEditingComponent] = useState(-1)
+  const [editingIndex, setEditingIndex] = useState(-1)
   const [currentExpenseList, setCurrentExpenseList] = useState([]);
   const [warningMessage, setWarningMessage] = useState("");
   const [expense, setExpense] = useState({
     whereSpent: "",
     howMuch: "",
   });
+  const [editExpense, setEditExpense] = useState({
+    whereSpent: "",
+    howMuch: "",
+    date: null,
+    id: -1
+  })
 
-  const handleFieldChange = (event) => {
+  const handleEditExpenseFieldChange = (event) => {
+    const { value, id } = event.target
+
+    if (id === 'howMuch') {
+      console.log(parseInt(value));
+      setEditExpense({
+        ...editExpense,
+        [id]: parseInt(value),
+      });
+      return;
+    }
+
+    setEditExpense({
+      ...editExpense,
+      [id]: value
+    })
+  }
+
+  const handleExpenseFormFieldChange = (event) => {
+    const { value, id } = event.target
+    
+    if (id === 'howMuch') {
+      setExpense({
+        ...expense,
+        [id]: parseInt(value),
+      });
+      return;
+    }
+
     setExpense({
       ...expense,
-      [event.target.id]: event.target.value,
+      [id]: value,
     });
   }
 
-  const validationField = (event) => {
-    const { howMuch, whereSpent } = expense;
-    const { form } = event.target
+  const addingExpenseValidation = () => {
+    const { howMuch, whereSpent } = expense
 
-    if (numberInputValidation(howMuch) || !form['howMuch'].value) {
+    if (numberInputValidation(howMuch)) {
       setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
       return;
     }
 
-    if (stringInputValidation(whereSpent) || !form['whereSpent'].value) {
+    if (stringInputValidation(whereSpent)) {
       setWarningMessage("Некорректно введённые данные");
       return;
     }
     setWarningMessage("");
 
-    if (indexEditingComponent !== -1) { //if expense element needs to be changed
-      const currentExpenseCost = currentExpenseList[indexEditingComponent].howMuch
-      const currentExpenseDate = currentExpenseList[indexEditingComponent].date
+    expensesSum.current += howMuch;
+    const dateToISO = new Date().toISOString()
 
-      const modifiedExpenseAfterEdit = {
-        ...expense,
-        expenseId: indexEditingComponent,
-        date: expense.date || currentExpenseDate
-      }
-      
-      currentExpenseList[indexEditingComponent] = modifiedExpenseAfterEdit;
-      expensesSum.current += +howMuch - currentExpenseCost;
-      setCurrentExpenseList(currentExpenseList)
-      setIndexEditingComponent(-1)
-
-    } else {
-      expensesSum.current += +howMuch;
-      const dateToISO = new Date().toISOString()
-
-      const modifiedExpense = {
-        ...expense,
-        expenseId: currentExpenseList.length,
-        date: dateToISO.split('T')[0]
-      };
-      setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
+    const modifiedExpense = {
+      ...expense,
+      id: currentExpenseList.length,
+      date: dateToISO.split('T')[0]
     }
 
-    form.reset()
+    setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
   }
 
-  const deleteExpense = (deletedExpenseId) => {
-    const expenseListAfterDelete = []
+  const editingExpenseValidation = () => {
+    const { howMuch, whereSpent, id } = editExpense
 
-    currentExpenseList.forEach((value, index) => {
-      if (index < deletedExpenseId) {
-        expenseListAfterDelete.push(value)
-      }
+    if (numberInputValidation(howMuch)) {
+      setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
+      return;
+    }
 
-      if (index > deletedExpenseId) {
-        value.expenseId--
-        expenseListAfterDelete.push(value)
-      }
-    })
+    if (stringInputValidation(whereSpent)) {
+      setWarningMessage("Некорректно введённые данные");
+      return;
+    }
 
-    const { howMuch } = currentExpenseList[deletedExpenseId]
-    expensesSum.current -= howMuch
-
-    setIndexEditingComponent(-1)
-    setCurrentExpenseList(expenseListAfterDelete)
+    const diffBetweenOldNewCost = howMuch - currentExpenseList[id].howMuch;
+    expensesSum.current += diffBetweenOldNewCost;
+    currentExpenseList[id] = editExpense;
+    setCurrentExpenseList(currentExpenseList)
+    setWarningMessage("")
+    setEditingIndex(-1)
   }
 
-  const editExpense = (expenseId) => setIndexEditingComponent(expenseId)
+  const handleEditingExpense = (expenseId, isDeleting = false) => {
+    if (isDeleting) {
+      const expenseListAfterDelete = []
+
+      currentExpenseList.forEach((value, index) => {
+        if (index < expenseId) {
+          expenseListAfterDelete.push(value)
+        }
+
+        if (index > expenseId) {
+          value.id--
+          expenseListAfterDelete.push(value)
+        }
+      })
+      expensesSum.current -= currentExpenseList[expenseId].howMuch
+      setCurrentExpenseList(expenseListAfterDelete)
+      return;
+    }
+
+    const currentEditExpense = currentExpenseList.find((expense) => expense.id === expenseId)
+    setEditingIndex(expenseId)
+    setEditExpense(currentEditExpense)
+  }
 
   return (
     <section className="expenseAccounting">
       <h1>Учёт моих расходов</h1>
       <ExpenseForm
         warning={warningMessage}
-        validation={validationField}
-        handleFields={handleFieldChange}
+        validation={addingExpenseValidation}
+        handleFields={handleExpenseFormFieldChange}
       />
-      <EditingExpenseContext.Provider value={{ deleteExpense, editExpense, handleFieldChange, validationField }}>
-        <DisplayExpenses
-          sum={expensesSum.current}
-          list={currentExpenseList}
-          editingElementId={indexEditingComponent}
-        />
-      </EditingExpenseContext.Provider>
+      <DisplayExpenses
+        sum={expensesSum.current}
+        list={currentExpenseList}
+        editExpense={editExpense}
+        editingIndex={editingIndex}
+        editExpenseHandler={handleEditingExpense}
+        fieldChange={handleEditExpenseFieldChange}
+        validation={editingExpenseValidation}
+      />
     </section>
   )
 }

@@ -8,4 +8,11 @@
 
 .displayExpenses__sumExpense {
   text-align: right;
+  font-weight: 700;
+}
+
+@media (max-width: 795px) {
+  .displayExpenses__sumExpense {
+    margin-bottom: 1rem;
+  }
 }
