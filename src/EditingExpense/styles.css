@@ -36,8 +36,22 @@
 }
 
 @media (max-width: 795px) {
+  .editingExpense {
+    display: grid;
+    grid-template-columns: repeat(3, 115px);
+  }
+
+  .editingExpense__howMuch {
+    margin-right: 0;
+  }
+
+  .editingExpense input {
+    width: 75px;
+  }
+
   .editingExpenseButtons {
+    width: 350px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 }
