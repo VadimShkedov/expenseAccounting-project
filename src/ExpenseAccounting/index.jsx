@@ -7,7 +7,6 @@ import "./styles.css";
 
 const ExpenseAccounting = () => {
   const expensesSum = useRef(0);
-  const [editingIndex, setEditingIndex] = useState(-1)
   const [currentExpenseList, setCurrentExpenseList] = useState([]);
   const [warningMessage, setWarningMessage] = useState("");
   const [expense, setExpense] = useState({
@@ -17,15 +16,13 @@ const ExpenseAccounting = () => {
   const [editExpense, setEditExpense] = useState({
     whereSpent: "",
     howMuch: "",
-    date: null,
-    id: -1
-  })
+    id: -1,
+  });
 
   const handleEditExpenseFieldChange = (event) => {
-    const { value, id } = event.target
+    const { value, id } = event.target;
 
     if (id === 'howMuch') {
-      console.log(parseInt(value));
       setEditExpense({
         ...editExpense,
         [id]: parseInt(value),
@@ -40,7 +37,7 @@ const ExpenseAccounting = () => {
   }
 
   const handleExpenseFormFieldChange = (event) => {
-    const { value, id } = event.target
+    const { value, id } = event.target;
     
     if (id === 'howMuch') {
       setExpense({
@@ -57,7 +54,7 @@ const ExpenseAccounting = () => {
   }
 
   const addingExpenseValidation = () => {
-    const { howMuch, whereSpent } = expense
+    const { howMuch, whereSpent } = expense;
 
     if (numberInputValidation(howMuch)) {
       setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
@@ -71,19 +68,19 @@ const ExpenseAccounting = () => {
     setWarningMessage("");
 
     expensesSum.current += howMuch;
-    const dateToISO = new Date().toISOString()
+    const dateToISO = new Date().toISOString();
 
     const modifiedExpense = {
       ...expense,
       id: currentExpenseList.length,
-      date: dateToISO.split('T')[0]
-    }
+      date: dateToISO.split('T')[0],
+    };
 
     setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
   }
 
   const editingExpenseValidation = () => {
-    const { howMuch, whereSpent, id } = editExpense
+    const { howMuch, whereSpent, id } = editExpense;
 
     if (numberInputValidation(howMuch)) {
       setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
@@ -98,33 +95,32 @@ const ExpenseAccounting = () => {
     const diffBetweenOldNewCost = howMuch - currentExpenseList[id].howMuch;
     expensesSum.current += diffBetweenOldNewCost;
     currentExpenseList[id] = editExpense;
-    setCurrentExpenseList(currentExpenseList)
-    setWarningMessage("")
-    setEditingIndex(-1)
+
+    setEditExpense(null);
+    setCurrentExpenseList(currentExpenseList);
+    setWarningMessage("");
   }
 
   const handleEditingExpense = (expenseId, isDeleting = false) => {
     if (isDeleting) {
-      const expenseListAfterDelete = []
+      const expenseListAfterDelete = [];
 
       currentExpenseList.forEach((value, index) => {
         if (index < expenseId) {
-          expenseListAfterDelete.push(value)
+          expenseListAfterDelete.push(value);
         }
 
         if (index > expenseId) {
-          value.id--
-          expenseListAfterDelete.push(value)
+          value.id--;
+          expenseListAfterDelete.push(value);
         }
       })
-      expensesSum.current -= currentExpenseList[expenseId].howMuch
-      setCurrentExpenseList(expenseListAfterDelete)
+      expensesSum.current -= currentExpenseList[expenseId].howMuch;
+      setCurrentExpenseList(expenseListAfterDelete);
       return;
     }
 
-    const currentEditExpense = currentExpenseList.find((expense) => expense.id === expenseId)
-    setEditingIndex(expenseId)
-    setEditExpense(currentEditExpense)
+    setEditExpense(currentExpenseList[expenseId]);
   }
 
   return (
@@ -138,8 +134,7 @@ const ExpenseAccounting = () => {
       <DisplayExpenses
         sum={expensesSum.current}
         list={currentExpenseList}
-        editExpense={editExpense}
-        editingIndex={editingIndex}
+        editingExpense={editExpense}
         editExpenseHandler={handleEditingExpense}
         fieldChange={handleEditExpenseFieldChange}
         validation={editingExpenseValidation}

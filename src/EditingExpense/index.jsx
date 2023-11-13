@@ -1,6 +1,6 @@
 import "./styles.css"
 
-const EditingExpense = ({ expense, editExpense, validationField, handleFieldChange }) => {
+const EditingExpense = ({ expense, handleEditExpense, validationField, handleFieldChange }) => {
   const { id, whereSpent, howMuch, date } = expense;
 
   return (
@@ -10,7 +10,7 @@ const EditingExpense = ({ expense, editExpense, validationField, handleFieldChan
       <input type="number" id="howMuch" className="editingExpense__howMuch" value={howMuch} onChange={handleFieldChange} />
       <div className="editingExpenseButtons">
         <input type="button" className="editingExpenseButtons__applyChanges" onClick={validationField} />
-        <input type="button" className="editingExpenseButtons__delete" onClick={() => editExpense(id, true)} />
+        <input type="button" className="editingExpenseButtons__delete" onClick={() => handleEditExpense(id, true)} />
       </div>
     </form>
   )

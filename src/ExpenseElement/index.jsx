@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const ExpenseElement = ({ expense, editExpense }) => {
+const ExpenseElement = ({ expense, handleEditExpense }) => {
   const { id, whereSpent, howMuch, date } = expense;
 
   return (
@@ -10,8 +10,8 @@ const ExpenseElement = ({ expense, editExpense }) => {
         <p>{date}</p>
         <p className="expenseElementInfo__howMuch">{howMuch} р.</p>
         <div className="expenseElementInfoButtons">
-          <input type="button" className="expenseElementInfoButtons__edit" onClick={() => editExpense(id)} />
-          <input type="button" className="expenseElementInfoButtons__delete" onClick={() => editExpense(id, true)}/>          
+          <input type="button" className="expenseElementInfoButtons__edit" onClick={() => handleEditExpense(id)} />
+          <input type="button" className="expenseElementInfoButtons__delete" onClick={() => handleEditExpense(id, true)}/>          
         </div>
       </div>
     </div>
