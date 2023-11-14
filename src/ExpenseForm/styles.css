@@ -41,7 +41,6 @@
   .expenseForm__button {
     padding: 0.4em 2em;
     margin-top: 1em;
-    min-width: 50%;
-    max-height: 50%;
+    width: 200px;
   }
 }

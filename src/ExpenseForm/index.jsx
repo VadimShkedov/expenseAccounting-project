@@ -1,7 +1,7 @@
 import Warning from "../Warning";
 import "./styles.css";
 
-const ExpenseForm = ({ handleFields, validation, warning }) =>
+const ExpenseForm = ({ handleFields, validation, warning, expense }) =>
   <div>
     <div className="expenseForm">
       <div>
@@ -10,6 +10,7 @@ const ExpenseForm = ({ handleFields, validation, warning }) =>
           type="text"
           className="expenseForm__whereSpent"
           id="whereSpent"
+          value={expense.whereSpent}
           onChange={handleFields}
           placeholder="Куда было потрачено"
         />
@@ -20,6 +21,7 @@ const ExpenseForm = ({ handleFields, validation, warning }) =>
           type="number"
           className="expenseForm__howMuch"
           id="howMuch"
+          value={expense.howMuch}
           onChange={handleFields}
           placeholder="Сколько было потрачено"
         />

@@ -62,14 +62,15 @@
   }
 
   .expenseElementInfo > * {
-    margin: 0.2em 0;
-    text-align: end;
+    margin: 1rem 0;
+    text-align: end;;
   }
 
   .expenseElementInfoButtons {
     display: flex;
     min-width: 100%;
     margin-right: 0;
+    margin-bottom: 0;
     align-self: center;
   }
 

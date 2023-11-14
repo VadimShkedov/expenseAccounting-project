@@ -14,7 +14,6 @@ const DisplayExpenses = ({ list, sum, editExpenseHandler, editingExpense, fieldC
             return (
               <EditingElement
                 expense={editingExpense}
-                handleEditExpense={editExpenseHandler}
                 validationField={validation}
                 handleFieldChange={fieldChange}
                 key={id}

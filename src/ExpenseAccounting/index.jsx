@@ -127,6 +127,7 @@ const ExpenseAccounting = () => {
     <section className="expenseAccounting">
       <h1>Учёт моих расходов</h1>
       <ExpenseForm
+        expense={expense}
         warning={warningMessage}
         validation={addingExpenseValidation}
         handleFields={handleExpenseFormFieldChange}
