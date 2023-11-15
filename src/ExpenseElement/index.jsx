@@ -1,21 +1,21 @@
 import "./styles.css";
 
-const ExpenseElement = ({ expense, handleEditExpense }) => {
+const Expense = ({ expense, handleEditingExpense, handleDeletingExpense }) => {
   const { id, whereSpent, howMuch, date } = expense;
 
   return (
-    <div className="expenseElement">
-      <p className="expenseElement__expenseName">{id + 1 + ")"} {whereSpent}</p>
-      <div className="expenseElementInfo">
+    <div className="expense">
+      <p className="expense__expenseName">{id + 1 + ")"} {whereSpent}</p>
+      <div className="expenseInfo">
         <p>{date}</p>
-        <p className="expenseElementInfo__howMuch">{howMuch} р.</p>
-        <div className="expenseElementInfoButtons">
-          <input type="button" className="expenseElementInfoButtons__edit" onClick={() => handleEditExpense(id)} />
-          <input type="button" className="expenseElementInfoButtons__delete" onClick={() => handleEditExpense(id, true)}/>          
+        <p className="expenseInfo__howMuch">{howMuch} р.</p>
+        <div className="expenseInfoButtons">
+          <button className="expenseInfoButtons__edit" onClick={() => handleEditingExpense(id)}></button>
+          <button className="expenseInfoButtons__delete" onClick={() => handleDeletingExpense(id)}></button>
         </div>
       </div>
     </div>
   )
 }
 
-export default ExpenseElement;
+export default Expense;

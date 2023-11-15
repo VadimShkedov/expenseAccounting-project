@@ -17,11 +17,11 @@
   margin-right: 0;
 }
 
-.editingExpenseButtons__applyChanges {
+.editingExpense__applyChanges {
   background-image: url('../svg/check.svg');
 }
 
-.editingExpenseButtons__applyChanges {
+.editingExpense__applyChanges {
   background-repeat: no-repeat;
   background-position: center;
   background-color: initial;
@@ -43,11 +43,5 @@
 
   .editingExpense input {
     width: 75px;
-  }
-
-  .editingExpenseButtons {
-    width: 350px;
-    display: flex;
-    flex-direction: row;
   }
 }

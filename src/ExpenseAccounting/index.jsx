@@ -3,6 +3,7 @@ import ExpenseForm from "../ExpenseForm";
 import DisplayExpenses from "../DisplayExpenses";
 import numberInputValidation from "../helpers/numberInputValidation";
 import stringInputValidation from "../helpers/stringInputValidation";
+import dateInputValidation from "../helpers/dateInputValidation";
 import "./styles.css";
 
 const ExpenseAccounting = () => {
@@ -16,13 +17,14 @@ const ExpenseAccounting = () => {
   const [editExpense, setEditExpense] = useState({
     whereSpent: "",
     howMuch: "",
-    id: -1,
+    date: "",
+    id: null,
   });
 
-  const handleEditExpenseFieldChange = (event) => {
+  const handleChangeField = (event) => {
     const { value, id } = event.target;
 
-    if (id === 'howMuch') {
+    if (!isNaN(value)) {
       setEditExpense({
         ...editExpense,
         [id]: parseInt(value),
@@ -36,10 +38,10 @@ const ExpenseAccounting = () => {
     })
   }
 
-  const handleExpenseFormFieldChange = (event) => {
+  const handleAddField = (event) => {
     const { value, id } = event.target;
-    
-    if (id === 'howMuch') {
+
+    if (!isNaN(value)) {
       setExpense({
         ...expense,
         [id]: parseInt(value),
@@ -56,16 +58,15 @@ const ExpenseAccounting = () => {
   const addingExpenseValidation = () => {
     const { howMuch, whereSpent } = expense;
 
-    if (numberInputValidation(howMuch)) {
-      setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
-      return;
-    }
-
     if (stringInputValidation(whereSpent)) {
       setWarningMessage("Некорректно введённые данные");
       return;
     }
-    setWarningMessage("");
+
+    if (numberInputValidation(howMuch)) {
+      setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
+      return;
+    }
 
     expensesSum.current += howMuch;
     const dateToISO = new Date().toISOString();
@@ -76,19 +77,29 @@ const ExpenseAccounting = () => {
       date: dateToISO.split('T')[0],
     };
 
+    setExpense({
+      whereSpent: "",
+      howMuch: "",
+    });
+    setWarningMessage("");
     setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
   }
 
   const editingExpenseValidation = () => {
-    const { howMuch, whereSpent, id } = editExpense;
-
-    if (numberInputValidation(howMuch)) {
-      setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
-      return;
-    }
+    const { howMuch, whereSpent, id, date } = editExpense;
 
     if (stringInputValidation(whereSpent)) {
       setWarningMessage("Некорректно введённые данные");
+      return;
+    }
+
+    if (dateInputValidation(date)) {
+      setWarningMessage("Некорректно введённая дата");
+      return;
+    }
+
+    if (numberInputValidation(howMuch)) {
+      setWarningMessage("Некорректно введённое число, допустимый диапозон от 1 до 100000");
       return;
     }
 
@@ -96,32 +107,24 @@ const ExpenseAccounting = () => {
     expensesSum.current += diffBetweenOldNewCost;
     currentExpenseList[id] = editExpense;
 
-    setEditExpense(null);
     setCurrentExpenseList(currentExpenseList);
     setWarningMessage("");
+    setEditExpense({
+      whereSpent: "",
+      howMuch: "",
+      date: "",
+      id: null,
+    });
   }
 
-  const handleEditingExpense = (expenseId, isDeleting = false) => {
-    if (isDeleting) {
-      const expenseListAfterDelete = [];
-
-      currentExpenseList.forEach((value, index) => {
-        if (index < expenseId) {
-          expenseListAfterDelete.push(value);
-        }
-
-        if (index > expenseId) {
-          value.id--;
-          expenseListAfterDelete.push(value);
-        }
-      })
-      expensesSum.current -= currentExpenseList[expenseId].howMuch;
-      setCurrentExpenseList(expenseListAfterDelete);
-      return;
-    }
-
-    setEditExpense(currentExpenseList[expenseId]);
+  const handleDeleteExpense = (expenseId) => {
+    expensesSum.current -= currentExpenseList[expenseId].howMuch;
+    const expenseListAfterDelete = currentExpenseList.filter((value) => value.id !== expenseId);
+  
+    setCurrentExpenseList(expenseListAfterDelete);
   }
+
+  const handleEditingExpense = (expenseId) => setEditExpense(currentExpenseList[expenseId]);
 
   return (
     <section className="expenseAccounting">
@@ -130,15 +133,17 @@ const ExpenseAccounting = () => {
         expense={expense}
         warning={warningMessage}
         validation={addingExpenseValidation}
-        handleFields={handleExpenseFormFieldChange}
+        handleFields={handleAddField}
       />
       <DisplayExpenses
         sum={expensesSum.current}
         list={currentExpenseList}
         editingExpense={editExpense}
-        editExpenseHandler={handleEditingExpense}
-        fieldChange={handleEditExpenseFieldChange}
-        validation={editingExpenseValidation}
+
+        handleEditingExpense={handleEditingExpense}
+        handleDeletingExpense={handleDeleteExpense}
+        handleChangeField={handleChangeField}
+        validationField={editingExpenseValidation}
       />
     </section>
   )

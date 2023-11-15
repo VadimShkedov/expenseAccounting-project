@@ -1,21 +1,21 @@
-import EditingElement from "../EditingExpense";
+import EditingExpense from "../EditingExpense";
 import ExpenseElement from "../ExpenseElement";
 import "./styles.css";
 
-const DisplayExpenses = ({ list, sum, editExpenseHandler, editingExpense, fieldChange, validation }) =>
+const DisplayExpenses = ({ list, sum, handleEditingExpense, handleDeletingExpense, editingExpense, handleChangeField, validationField }) =>
   <div className="displayExpenses">
     <div className="displayExpenses__sumExpense">Итого: {sum} р.</div>
     <div className="displayExpensesList">
       {
-        list.map((expenseValue) => {
-          const { id } = expenseValue;
+        list.map((expense) => {
+          const { id } = expense;
 
           if (editingExpense?.id === id) {
             return (
-              <EditingElement
+              <EditingExpense
                 expense={editingExpense}
-                validationField={validation}
-                handleFieldChange={fieldChange}
+                validationField={validationField}
+                handleChangeField={handleChangeField}
                 key={id}
               />
             )
@@ -23,8 +23,9 @@ const DisplayExpenses = ({ list, sum, editExpenseHandler, editingExpense, fieldC
 
           return (
             <ExpenseElement
-              expense={expenseValue}
-              handleEditExpense={editExpenseHandler}
+              expense={expense}
+              handleDeletingExpense={handleDeletingExpense}
+              handleEditingExpense={handleEditingExpense}
               key={id}
             />
           )
