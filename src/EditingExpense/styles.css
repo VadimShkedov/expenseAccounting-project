@@ -13,10 +13,6 @@
   width: 150px;
 }
 
-.editingExpenseButtons {
-  margin-right: 0;
-}
-
 .editingExpense__applyChanges {
   background-image: url('../svg/check.svg');
 }

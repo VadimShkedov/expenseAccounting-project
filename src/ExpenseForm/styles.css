@@ -34,7 +34,8 @@
     margin-right: 0;
   }
 
-  .expenseForm__howMuch, .expenseForm__whereSpent {
+  .expenseForm__howMuch,
+  .expenseForm__whereSpent {
     width: 365px;
   }
 
