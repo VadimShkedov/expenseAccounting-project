@@ -1,6 +1,6 @@
 const stringInputValidation = (value) => {
   const stringWithoutSpace = value.trim();
-  return (stringWithoutSpace.length === 0 || !isNaN(+stringWithoutSpace));
+  return (stringWithoutSpace || !isNaN(stringWithoutSpace));
 }
 
 export default stringInputValidation;
