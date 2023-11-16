@@ -13,6 +13,7 @@ const ExpenseAccounting = () => {
   const [expense, setExpense] = useState({
     whereSpent: "",
     howMuch: "",
+    id: 0
   });
   const [editExpense, setEditExpense] = useState({
     whereSpent: "",
@@ -73,13 +74,13 @@ const ExpenseAccounting = () => {
 
     const modifiedExpense = {
       ...expense,
-      id: currentExpenseList.length,
       date: dateToISO.split('T')[0],
     };
 
     setExpense({
       whereSpent: "",
       howMuch: "",
+      id: expense.id + 1
     });
     setWarningMessage("");
     setCurrentExpenseList([...currentExpenseList, modifiedExpense]);
