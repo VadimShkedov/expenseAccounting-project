@@ -1,5 +1,10 @@
 @import url("./fonts/fonts.css");
 
+body {
+  margin: 0;
+  background-color: #C2E7FF;
+}
+
 button,
 .expenseAccounting, 
 input {
@@ -32,4 +37,18 @@ button {
 
 input::placeholder {
   opacity: 0.5;
+}
+
+@media (max-width: 795px) {
+  label {
+    margin: 1em 0;
+  }
+  
+  button {
+    padding: 0 1em;
+  }
+
+  input {
+    flex: 1;
+  }
 }

@@ -1,0 +1,43 @@
+.editingExpense {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+.editingExpense > * {
+  margin: 0.5em 0;
+}
+
+.editingExpense__expenseName {
+  width: 150px;
+}
+
+.editingExpense__applyChanges {
+  background-image: url('../svg/check.svg');
+}
+
+.editingExpense__applyChanges {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: initial;
+  border: none;
+  padding: 1.2em;
+  cursor: pointer;
+}
+
+@media (max-width: 795px) {
+  .editingExpense {
+    display: grid;
+    grid-template-columns: repeat(4, 115px);
+    min-height: 147px;
+  }
+
+  .editingExpense__howMuch {
+    margin-right: 0;
+  }
+
+  .editingExpense input {
+    width: 75px;
+  }
+}

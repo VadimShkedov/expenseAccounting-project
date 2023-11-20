@@ -18,3 +18,30 @@
 .expenseForm__howMuch {
   width: 160px;
 }
+
+.expenseForm__button {
+  align-self: end;
+  padding: 0.7em 2em;
+}
+
+@media (max-width: 795px) {
+  .expenseForm {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .expenseForm > div {
+    margin-right: 0;
+  }
+
+  .expenseForm__howMuch,
+  .expenseForm__whereSpent {
+    width: 365px;
+  }
+
+  .expenseForm__button {
+    padding: 0.4em 2em;
+    margin-top: 1em;
+    width: 200px;
+  }
+}

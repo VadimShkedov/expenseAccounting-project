@@ -1,15 +1,16 @@
 import Warning from "../Warning";
 import "./styles.css";
 
-const ExpenseForm = ({ handleFields, validation, warning }) =>
+const ExpenseForm = ({ handleFields, validation, warning, expense }) =>
   <div>
-    <form className="expenseForm">
+    <div className="expenseForm">
       <div>
         <label htmlFor="whereSpent">Куда было потрачено:</label>
         <input
           type="text"
           className="expenseForm__whereSpent"
           id="whereSpent"
+          value={expense.whereSpent}
           onChange={handleFields}
           placeholder="Куда было потрачено"
         />
@@ -20,12 +21,13 @@ const ExpenseForm = ({ handleFields, validation, warning }) =>
           type="number"
           className="expenseForm__howMuch"
           id="howMuch"
+          value={expense.howMuch}
           onChange={handleFields}
           placeholder="Сколько было потрачено"
         />
       </div>
-      <button type="button" onClick={validation}>Добавить</button>
-    </form>
+      <button type="button" className="expenseForm__button" onClick={validation}>Добавить</button>
+    </div>
     <Warning message={warning} />
   </div>
 
